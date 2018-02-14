@@ -1,0 +1,7 @@
+/.bundle
+/log/*
+!/log/.keep
+/tmp
+coverage
+.env
+node_modules/

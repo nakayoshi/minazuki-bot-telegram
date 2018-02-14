@@ -1,0 +1,25 @@
+{
+  "name": "minazuki-bot",
+  "version": "alpha",
+  "description": "風子ちゃんBOT telegram版",
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.9.3"
+  },
+  "scripts": {
+    "test": "eslint -c .eslintrc.yml --ext=js ."
+  },
+  "author": "Neetshin <n33t5hin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "eslint": "^4.17.0",
+    "eslint-plugin-node": "^6.0.0",
+    "i18n": "^0.8.3",
+    "jsdom": "^11.6.2",
+    "node": "^8.9.3",
+    "node-telegram-bot-api": "^0.30.0",
+    "node-wikipedia": "^0.0.2",
+    "typescript": "^2.7.1"
+  }
+}
