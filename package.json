@@ -1,21 +1,24 @@
 {
   "name": "minazuki-bot",
   "version": "alpha",
-  "description": "風子ちゃんBOT telegram版",
+  "private": true,
+  "author": "Neetshin <n33t5hin@gmail.com>",
+  "description": "Super kawaii chat bot for Telegram",
+  "license": "MIT",
   "main": "index.ts",
   "engines": {
-    "node": ">=8.9.3"
+    "node": ">=9.5"
   },
   "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node ./dist",
     "test": "tslint -c .tslint.yml --ext=ts ."
   },
-  "author": "Neetshin <n33t5hin@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "dotenv": "^5.0.0",
     "i18n": "^0.8.3",
     "jsdom": "^11.6.2",
-    "node": "^8.9.3",
+    "node": "^9.5",
     "node-telegram-bot-api": "^0.30.0",
     "node-wikipedia": "^0.0.2",
     "tslint": "^5.9.1",
