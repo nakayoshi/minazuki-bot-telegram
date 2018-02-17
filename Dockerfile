@@ -17,8 +17,13 @@ RUN apk -U upgrade \
  && npm install -g typescript \
  && rm -rf /var/cache/apk/*
 
+COPY yarn.lock /minazuki-bot
+
+RUN yarn install --pure-lockfile \
+ && yarn run clear
+
 COPY . /minazuki-bot
 
 VOLUME /minazuki-bot
 
-CMD ["echo running"]
+CMD ["npm run start"]
