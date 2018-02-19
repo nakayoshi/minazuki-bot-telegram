@@ -1,4 +1,4 @@
-FROM node:9.5-alpine
+FROM node:8.9.4-alpine
 
 LABEL maintainer='Neetshin <n33t5hin@gmail.com>' \
       description='Super kawaii chat bot for Telegram'
