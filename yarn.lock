@@ -2,6 +2,50 @@
 # yarn lockfile v1
 
 
+"@types/caseless@*":
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/@types/caseless/-/caseless-0.12.1.tgz#9794c69c8385d0192acc471a540d1f8e0d16218a"
+
+"@types/dotenv@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-4.0.2.tgz#f2983f0afe9fd7f6eb8aef515a4d77f4cbaa0597"
+  dependencies:
+    "@types/node" "*"
+
+"@types/form-data@*":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/form-data/-/form-data-2.2.1.tgz#ee2b3b8eaa11c0938289953606b745b738c54b1e"
+  dependencies:
+    "@types/node" "*"
+
+"@types/i18n@^0.8.3":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.8.3.tgz#f602164f2fae486ea87590f6be5d6dd5db1664e6"
+
+"@types/node-telegram-bot-api@^0.28.2":
+  version "0.28.2"
+  resolved "https://registry.yarnpkg.com/@types/node-telegram-bot-api/-/node-telegram-bot-api-0.28.2.tgz#5debdb9f8021657b32aaa48b8deaf8472e449486"
+  dependencies:
+    "@types/node" "*"
+    "@types/request" "*"
+
+"@types/node@*":
+  version "9.4.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+
+"@types/request@*":
+  version "2.47.0"
+  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.47.0.tgz#76a666cee4cb85dcffea6cd4645227926d9e114e"
+  dependencies:
+    "@types/caseless" "*"
+    "@types/form-data" "*"
+    "@types/node" "*"
+    "@types/tough-cookie" "*"
+
+"@types/tough-cookie@*":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.2.tgz#e0d481d8bb282ad8a8c9e100ceb72c995fb5e709"
+
 CSSselect@~0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/CSSselect/-/CSSselect-0.4.1.tgz#f8ab7e1f8418ce63cda6eb7bd778a85d7ec492b2"
@@ -890,7 +934,7 @@ node-wikipedia@^0.0.2:
     npmlog "~0.0.6"
     request ">= 2.3.0"
 
-node@^8.9.3:
+node@^8.9.4:
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/node/-/node-8.9.4.tgz#5ab1e5ec49067a25e007e361b5f80de9dc0460fc"
   dependencies:
