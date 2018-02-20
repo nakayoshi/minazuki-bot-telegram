@@ -1,0 +1,10 @@
+{
+	"datetime": "H時mm分ss秒",
+	"hello_with_name": "おはよーございます%s。清く正しく生きてますか？",
+	"hello": "おはよーございます。清く正しく生きてますか？",
+	"wikipedia": "%s\n\n[もっと読む...](%s)",
+	"wikipedia_not_found": "記事が見つからなかったです。",
+	"wikipedia_query_undefined": "キーワードを指定してくだせー",
+	"timezone_undefined": "タイムゾーンを指定してくだせー",
+	"timezone_not_found": "タイムゾーンが見つからなかったです。"
+}

@@ -1,24 +1,73 @@
 import dotenv from 'dotenv';
-import TelegramBot, { Message } from 'node-telegram-bot-api';
-import messageHandler from './message_handler';
+import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
+import i18n from 'i18n';
+import { resolve } from 'path';
+
+import hello from './methods/hello';
+import wikipedia from './methods/wikipedia';
+import timezone from './methods/timezone';
+
 dotenv.config({ path: '.env' });
 
-console.log('i am index');
+i18n.configure({
+  locales: ['ja', 'en'],
+  defaultLocale: 'ja',
+  fallbacks: { 'ja-JP': 'ja' },
+  directory: resolve(__dirname, '..', 'messages'),
+  register: global,
+});
 
-const token: string | undefined = process.env.AUTHORIZATION_TOKEN;
+class Minazuki {
 
-if (token === undefined) {
-  throw "Authorization token was not set";
+  public api: nodeTelegramBotApi;
+
+  constructor () {
+    const token = process.env.AUTHORIZATION_TOKEN as string;
+
+    this.api = new nodeTelegramBotApi(token, { polling: true });
+    this.api.on('message', (message: Message): void => this.handleMessage(message));
+  }
+
+  handleMessage (message: Message): void {
+    const { text, chat, from } = message;
+
+    if (from && from.language_code) {
+      i18n.setLocale(from.language_code);
+    }
+
+    if (!text) {
+      return;
+    }
+
+    /**
+     * /hello
+     */
+    if (/^\/hello/.test(text)) {
+      hello(message).then((text) => {
+        this.api.sendMessage(chat.id, text);
+      });
+
+    /**
+     * /wiki [query]
+     */
+    } else if (/^\/wiki/.test(text)) {
+      wikipedia(message).then((text) => {
+        this.api.sendMessage(chat.id, text, {
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+        });
+      });
+
+    /**
+     * /time [timezone]
+     */
+    } else if (/^\/time/.test(text)) {
+      timezone(message).then((text) => {
+        this.api.sendMessage(chat.id, text);
+      });
+    }
+  }
+
 }
 
-const Minazuki = new TelegramBot(token, { polling: true });
-
-Minazuki
-  .on('message', (message: Message): void => {
-    const responseText: string | void = messageHandler(message);
-    const { chat } = message;
-
-    if ( responseText ) {
-      Minazuki.sendMessage(chat.id, responseText);
-    }
-  });
+export default new Minazuki();
