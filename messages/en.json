@@ -1,10 +1,16 @@
 {
 	"datetime": "H:mm:ss",
+
 	"hello_with_name": "Hello world, %s",
 	"hello": "Hello world",
+
+	"leave": "Bye <3",
+	"leave_on_private": "This is private chat",
+
 	"wikipedia": "%s\n\n[Read more...](%s)",
 	"wikipedia_not_found": "No such article in Wikipedia",
 	"wikipedia_query_undefined": "You need to specify the keyword of article",
+
 	"timezone_undefined": "You need to specify the timezone",
 	"timezone_not_found": "Unknown timezone specified"
 }

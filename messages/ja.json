@@ -1,10 +1,20 @@
 {
 	"datetime": "H時mm分ss秒",
+
 	"hello_with_name": "おはよーございます%s。清く正しく生きてますか？",
 	"hello": "おはよーございます。清く正しく生きてますか？",
+
+	"leave": "さ、解散解散。引き上げでーす。",
+	"leave_on_private": "ココはプライベートチャットですよ？",
+
+	"webarchive": "Webページのアーカイブをリクエストしました:\n%s",
+	"webarchive_undefined": "URLを指定してくだせー",
+	"webarchive_not_found": "Webページが見つからなかったです。",
+
 	"wikipedia": "%s\n\n[もっと読む...](%s)",
 	"wikipedia_not_found": "記事が見つからなかったです。",
 	"wikipedia_query_undefined": "キーワードを指定してくだせー",
+
 	"timezone_undefined": "タイムゾーンを指定してくだせー",
 	"timezone_not_found": "タイムゾーンが見つからなかったです。"
 }

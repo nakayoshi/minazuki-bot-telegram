@@ -1,7 +1,16 @@
 ---
 defaultSeverity: error
+
 extends:
-- tslint-config-airbnb
-jsRules: {}
-rules: {}
+- tslint:recommended
+
+jsRules:
+
+rules:
+  max-line-length: false
+  quotemark:
+  - true
+  - single
+  ordered-imports: false
+  object-literal-sort-keys: false
 rulesDirectory: []

@@ -1,15 +1,10 @@
-import { Message } from 'node-telegram-bot-api';
+import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
 import { __ } from 'i18n';
 
-const hello = (message: Message): Promise<string> => {
+const hello = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
-    const { from } = message;
-
-    if (from && from.first_name) {
-      resolve(__('hello_with_name', from.first_name));
-    }
-
-    resolve(__('hello'));
+    const { chat, from } = message;
+    resolve(api.sendMessage(chat.id, from && from.first_name ? __('hello_with_name', from.first_name) : __('hello')));
   });
 };
 

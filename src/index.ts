@@ -6,12 +6,14 @@ import { resolve } from 'path';
 import hello from './methods/hello';
 import wikipedia from './methods/wikipedia';
 import timezone from './methods/timezone';
+import leave from './methods/leave';
+import webarchive from './methods/webarchive';
 
 dotenv.config({ path: '.env' });
 
 i18n.configure({
   locales: ['ja', 'en'],
-  defaultLocale: 'ja',
+  defaultLocale: 'en',
   fallbacks: { 'ja-JP': 'ja' },
   directory: resolve(__dirname, '..', 'messages'),
   register: global,
@@ -21,15 +23,15 @@ class Minazuki {
 
   public api: nodeTelegramBotApi;
 
-  constructor () {
+  constructor() {
     const token = process.env.AUTHORIZATION_TOKEN as string;
 
     this.api = new nodeTelegramBotApi(token, { polling: true });
     this.api.on('message', (message: Message): void => this.handleMessage(message));
   }
 
-  handleMessage (message: Message): void {
-    const { text, chat, from } = message;
+  private handleMessage(message: Message): void {
+    const { text, from } = message;
 
     if (from && from.language_code) {
       i18n.setLocale(from.language_code);
@@ -43,28 +45,31 @@ class Minazuki {
      * /hello
      */
     if (/^\/hello/.test(text)) {
-      hello(message).then((text) => {
-        this.api.sendMessage(chat.id, text);
-      });
+      hello(this.api, message);
 
     /**
      * /wiki [query]
      */
     } else if (/^\/wiki/.test(text)) {
-      wikipedia(message).then((text) => {
-        this.api.sendMessage(chat.id, text, {
-          parse_mode: 'Markdown',
-          disable_web_page_preview: true,
-        });
-      });
+      wikipedia(this.api, message);
 
     /**
      * /time [timezone]
      */
-    } else if (/^\/time/.test(text)) {
-      timezone(message).then((text) => {
-        this.api.sendMessage(chat.id, text);
-      });
+    } else if (/^\/timezone/.test(text)) {
+      timezone(this.api, message);
+
+    /**
+     * /webarchive [url]
+     */
+    } else if (/^\/webarchive/.test(text)) {
+      webarchive(this.api, message);
+
+    /**
+     * /leave
+     */
+    } else if (/^\/leave/.test(text)) {
+      leave(this.api, message);
     }
   }
 

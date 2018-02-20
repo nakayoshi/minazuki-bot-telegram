@@ -1,23 +1,23 @@
 import momentTimezone from 'moment-timezone';
-import { Message } from 'node-telegram-bot-api';
+import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
 import { __ } from 'i18n';
 
-const timezone = (message: Message): Promise<string> => {
+const timezone = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
-    const { text = '' } = message;
-    const matches = text.match(/^\/time (.+?)$/);
+    const { chat, text = '' } = message;
+    const matches = text.match(/^\/timezone (.+?)$/);
 
     if (!matches) {
-      return resolve(__('timezone_undefined'));
+      return resolve(api.sendMessage(chat.id, __('timezone_undefined')));
     }
 
-    const [, timezone] = matches as string[];
+    const [, timezoneName] = matches as string[];
 
     try {
-      const formattedDate = momentTimezone().tz(timezone).format(__('datetime'));
-      resolve(formattedDate);
+      const formattedDate = momentTimezone().tz(timezoneName).format(__('datetime'));
+      resolve(api.sendMessage(chat.id, formattedDate));
     } catch {
-      return resolve(__('timezone_not_found'));
+      resolve(api.sendMessage(chat.id, __('timezone_not_found')));
     }
   });
 };

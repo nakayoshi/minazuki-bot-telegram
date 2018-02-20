@@ -1,22 +1,31 @@
-import { Message } from 'node-telegram-bot-api';
+import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
 import wikijs from 'wikijs';
 import { __ } from 'i18n';
 
-const wikipedia = (message: Message): Promise<string> => {
-  const { text = '' } = message;
-  const matches = text.match(/^\/wiki (.+?)$/);
+const wikipedia = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
+  return new Promise((resolve) => {
+    const { chat, text = '' } = message;
+    const matches = text.match(/^\/wiki (.+?)$/);
 
-  if (!matches) {
-    return Promise.resolve(__('wikipedia_query_undefined'));
-  }
+    if (!matches) {
+      resolve(api.sendMessage(chat.id, __('wikipedia_query_undefined')));
+      return;
+    }
 
-  const conf = { apiUrl: 'https://ja.wikipedia.org/w/api.php' };
-  const [, query] = matches as string[];
+    const conf = { apiUrl: 'https://ja.wikipedia.org/w/api.php' };
+    const [, query] = matches as string[];
 
-  return wikijs(conf).page(query).then(page => page.summary()).then((summary) => {
-    return __('wikipedia', summary, `https://ja.wikipedia.org/wiki/${query}`);
-  }).catch(() => {
-    return __('wikipedia_not_found');
+    wikijs(conf).page(query).then((page) => page.summary()).then((summary) => {
+      const response = __('wikipedia', summary, `https://ja.wikipedia.org/wiki/${query}`);
+      const options  = {
+        parse_mode: 'Markdown',
+        disable_web_page_preview: true,
+      };
+
+      resolve(api.sendMessage(chat.id, response, options));
+    }).catch(() => {
+      resolve(api.sendMessage(chat.id, __('wikipedia_not_found')));
+    });
   });
 };
 
