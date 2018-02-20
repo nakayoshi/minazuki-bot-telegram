@@ -5,7 +5,7 @@ import { __ } from 'i18n';
 const wikipedia = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
     const { chat, text = '' } = message;
-    const matches = text.match(/^\/wiki (.+?)$/);
+    const matches = text.match(/^\/wiki\s(.+?)$/);
 
     if (!matches) {
       resolve(api.sendMessage(chat.id, __('wikipedia_query_undefined')));

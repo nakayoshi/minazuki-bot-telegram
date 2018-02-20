@@ -5,7 +5,7 @@ import { __ } from 'i18n';
 const timezone = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
     const { chat, text = '' } = message;
-    const matches = text.match(/^\/timezone (.+?)$/);
+    const matches = text.match(/^\/timezone\s(.+?)$/);
 
     if (!matches) {
       return resolve(api.sendMessage(chat.id, __('timezone_undefined')));

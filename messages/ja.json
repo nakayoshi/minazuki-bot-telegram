@@ -1,5 +1,7 @@
 {
-	"datetime": "H時mm分ss秒",
+	"datetime": "H時mm分",
+
+	"help": "/wiki - Wikipediaで記事を検索\n/webarchive - archive.orgでWebサイトをアーカイブ\n/timezone - タイムゾーンでの現在の時刻を表示\n/leave - チャットから退会",
 
 	"hello_with_name": "おはよーございます%s。清く正しく生きてますか？",
 	"hello": "おはよーございます。清く正しく生きてますか？",
@@ -7,7 +9,7 @@
 	"leave": "さ、解散解散。引き上げでーす。",
 	"leave_on_private": "ココはプライベートチャットですよ？",
 
-	"webarchive": "Webページのアーカイブをリクエストしました:\n%s",
+	"webarchive": "Webページのアーカイブをリクエストしました (日本語が含まれたURLは正常に機能しません):\n%s",
 	"webarchive_undefined": "URLを指定してくだせー",
 	"webarchive_not_found": "Webページが見つからなかったです。",
 

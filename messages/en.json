@@ -1,5 +1,7 @@
 {
-	"datetime": "H:mm:ss",
+	"datetime": "H:mm",
+
+	"help": "/wiki - to find an article in Wikipedia\n/webarchive - to archive web site via archive.org\n/timezone - to show current time at timezone\n/leave - to leave form chat",
 
 	"hello_with_name": "Hello world, %s",
 	"hello": "Hello world",

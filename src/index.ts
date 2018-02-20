@@ -4,6 +4,7 @@ import i18n from 'i18n';
 import { resolve } from 'path';
 
 import hello from './methods/hello';
+import help from './methods/help';
 import wikipedia from './methods/wikipedia';
 import timezone from './methods/timezone';
 import leave from './methods/leave';
@@ -46,6 +47,12 @@ class Minazuki {
      */
     if (/^\/hello/.test(text)) {
       hello(this.api, message);
+
+    /**
+     * /helo
+     */
+    } else if (/^\/help/.test(text)) {
+      help(this.api, message);
 
     /**
      * /wiki [query]
