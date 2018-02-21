@@ -1,16 +1,15 @@
 import dotenv from 'dotenv';
-import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
+import TelegramApi, { Message } from 'node-telegram-bot-api';
 import i18n from 'i18n';
 import { resolve } from 'path';
-
+import express from 'express';
+import bodyParser from 'body-parser';
 import hello from './methods/hello';
 import help from './methods/help';
 import wikipedia from './methods/wikipedia';
 import timezone from './methods/timezone';
 import leave from './methods/leave';
 import webarchive from './methods/webarchive';
-
-dotenv.config({ path: '.env' });
 
 i18n.configure({
   locales: ['ja', 'en'],
@@ -20,66 +19,70 @@ i18n.configure({
   register: global,
 });
 
-class Minazuki {
+// Define variables from .env
+dotenv.config({ path: '.env' });
+const token = process.env.AUTHORIZATION_TOKEN as string;
+const [ host, port = null ] = (process.env.APP_HOST as string).split(':');
 
-  public api: nodeTelegramBotApi;
+const app = express();
 
-  constructor() {
-    const token = process.env.AUTHORIZATION_TOKEN as string;
+app.use(bodyParser.json());
 
-    this.api = new nodeTelegramBotApi(token, { polling: true });
-    this.api.on('message', (message: Message): void => this.handleMessage(message));
+app.post(`/bot${token}`, (req, res) => {
+  api.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+app.listen(port);
+
+const api = new TelegramApi(token, { polling: true });
+api.setWebHook(`${host}/bot${token}`);
+
+api.on('message', (message: Message): void => {
+  const { text, from } = message;
+
+  if (from && from.language_code) {
+    i18n.setLocale(from.language_code);
   }
 
-  private handleMessage(message: Message): void {
-    const { text, from } = message;
-
-    if (from && from.language_code) {
-      i18n.setLocale(from.language_code);
-    }
-
-    if (!text) {
-      return;
-    }
-
-    /**
-     * /hello
-     */
-    if (/^\/hello/.test(text)) {
-      hello(this.api, message);
-
-    /**
-     * /helo
-     */
-    } else if (/^\/help/.test(text)) {
-      help(this.api, message);
-
-    /**
-     * /wiki [query]
-     */
-    } else if (/^\/wiki/.test(text)) {
-      wikipedia(this.api, message);
-
-    /**
-     * /time [timezone]
-     */
-    } else if (/^\/timezone/.test(text)) {
-      timezone(this.api, message);
-
-    /**
-     * /webarchive [url]
-     */
-    } else if (/^\/webarchive/.test(text)) {
-      webarchive(this.api, message);
-
-    /**
-     * /leave
-     */
-    } else if (/^\/leave/.test(text)) {
-      leave(this.api, message);
-    }
+  if (!text) {
+    return;
   }
 
-}
+  /**
+   * /hello
+   */
+  if (/^\/hello/.test(text)) {
+    hello(api, message);
 
-export default new Minazuki();
+  /**
+   * /help
+   */
+  } else if (/^\/help/.test(text)) {
+    help(api, message);
+
+  /**
+   * /wiki [query]
+   */
+  } else if (/^\/wiki/.test(text)) {
+    wikipedia(api, message);
+
+  /**
+   * /time [timezone]
+   */
+  } else if (/^\/timezone/.test(text)) {
+    timezone(api, message);
+
+  /**
+   * /webarchive [url]
+   */
+  } else if (/^\/webarchive/.test(text)) {
+    webarchive(api, message);
+
+  /**
+   * /leave
+   */
+  } else if (/^\/leave/.test(text)) {
+    leave(api, message);
+  }
+});

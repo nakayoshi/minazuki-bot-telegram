@@ -13,7 +13,7 @@ const webarchive = (api: nodeTelegramBotApi, message: Message): Promise<Message 
 
     const [, url] = matches as string[];
     const formattedUrl = `https://web.archive.org/save/${url}`;
-    const options  = {
+    const options = {
       disable_web_page_preview: true,
     };
 
