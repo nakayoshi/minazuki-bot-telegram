@@ -26,6 +26,4 @@ RUN yarn install --pure-lockfile \
 
 COPY . /minazuki-bot
 
-VOLUME /minazuki-bot
-
 CMD ["npm", "run", "start"]
