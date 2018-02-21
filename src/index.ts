@@ -21,22 +21,25 @@ i18n.configure({
 
 // Define variables from .env
 dotenv.config({ path: '.env' });
-const token = process.env.AUTHORIZATION_TOKEN as string;
-const [ host, port = null ] = (process.env.APP_HOST as string).split(':');
+const token    = process.env.AUTHORIZATION_TOKEN as string;
+const url      = process.env.APP_URL as string;
+const port     = process.env.APP_PORT as string;
+const endpoint = `/bot${token}`;
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.post(`/bot${token}`, (req, res) => {
+app.post(endpoint, (req, res) => {
   api.processUpdate(req.body);
   res.sendStatus(200);
 });
 
 app.listen(port);
 
-const api = new TelegramApi(token, { polling: true });
-api.setWebHook(`${host}/bot${token}`);
+const api = new TelegramApi(token);
+
+api.setWebHook(`${url}:${port}${endpoint}`);
 
 api.on('message', (message: Message): void => {
   const { text, from } = message;
