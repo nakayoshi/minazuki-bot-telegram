@@ -27,6 +27,7 @@ const port     = process.env.APP_PORT as string;
 const endpoint = `/bot${token}`;
 
 const app = express();
+const api = new TelegramApi(token);
 
 app.use(bodyParser.json());
 
@@ -36,8 +37,6 @@ app.post(endpoint, (req, res): void => {
 });
 
 app.listen(port);
-
-const api = new TelegramApi(token);
 
 api.setWebHook(`${url}:${port}${endpoint}`);
 
