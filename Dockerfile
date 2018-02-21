@@ -22,7 +22,7 @@ RUN apk -U upgrade \
 COPY package.json yarn.lock /minazuki-bot/
 
 RUN yarn install --pure-lockfile \
-    yarn run clear
+ && yarn run clear
 
 COPY . /minazuki-bot
 
