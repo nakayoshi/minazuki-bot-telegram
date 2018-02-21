@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import TelegramApi, { Message } from 'node-telegram-bot-api';
+import TelegramApi from 'node-telegram-bot-api';
 import i18n from 'i18n';
 import { resolve } from 'path';
 import express from 'express';
@@ -20,7 +20,7 @@ i18n.configure({
 });
 
 // Define variables from .env
-dotenv.config({ path: '.env' });
+dotenv.config({ path: resolve(__dirname, '..', '.env') });
 const token    = process.env.AUTHORIZATION_TOKEN as string;
 const url      = process.env.APP_URL as string;
 const port     = process.env.APP_PORT as string;
@@ -30,7 +30,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.post(endpoint, (req, res) => {
+app.post(endpoint, (req, res): void => {
   api.processUpdate(req.body);
   res.sendStatus(200);
 });
@@ -41,7 +41,7 @@ const api = new TelegramApi(token);
 
 api.setWebHook(`${url}:${port}${endpoint}`);
 
-api.on('message', (message: Message): void => {
+api.on('message', (message): void => {
   const { text, from } = message;
 
   if (from && from.language_code) {
