@@ -28,4 +28,4 @@ COPY . /minazuki-bot
 
 VOLUME /minazuki-bot
 
-CMD ["npm run start"]
+CMD ["npm", "run", "start"]
