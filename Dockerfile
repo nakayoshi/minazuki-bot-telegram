@@ -7,7 +7,7 @@ ENV NODE_ENV=production
 
 WORKDIR /minazuki-bot
 
-EXPOSE 3000
+EXPOSE 80
 
 RUN apk -U upgrade \
  && apk add \
