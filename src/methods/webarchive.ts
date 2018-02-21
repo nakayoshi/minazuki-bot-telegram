@@ -1,8 +1,8 @@
-import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
+import TelegramBot, { Message } from 'node-telegram-bot-api';
 import axios from 'axios';
 import { __ } from 'i18n';
 
-const webarchive = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
+const webarchive = (api: TelegramBot, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
     const { chat, text = '' } = message;
     const matches = text.match(/^\/webarchive\s((?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*)$/);

@@ -7,6 +7,8 @@ ENV NODE_ENV=production
 
 WORKDIR /minazuki-bot
 
+EXPOSE 3000
+
 RUN apk -U upgrade \
  && apk add \
     curl \

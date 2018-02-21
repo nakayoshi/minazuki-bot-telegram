@@ -1,8 +1,8 @@
 import momentTimezone from 'moment-timezone';
-import nodeTelegramBotApi, { Message } from 'node-telegram-bot-api';
+import TelegramBot, { Message } from 'node-telegram-bot-api';
 import { __ } from 'i18n';
 
-const timezone = (api: nodeTelegramBotApi, message: Message): Promise<Message | Error> => {
+const timezone = (api: TelegramBot, message: Message): Promise<Message | Error> => {
   return new Promise((resolve) => {
     const { chat, text = '' } = message;
     const matches = text.match(/^\/timezone\s(.+?)$/);
