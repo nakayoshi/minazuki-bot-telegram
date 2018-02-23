@@ -2,7 +2,10 @@ version: "3"
 services:
 
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - ssl_certificate=
     image: neetshin/minazuki-bot
     restart: always
     env_file: .env
