@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 import TelegramApi from 'node-telegram-bot-api';
 import i18n from 'i18n';
-import { resolve } from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { resolve } from 'path';
 import hello from './methods/hello';
 import help from './methods/help';
 import wikipedia from './methods/wikipedia';
@@ -21,32 +21,21 @@ i18n.configure({
 
 dotenv.config({ path: resolve(__dirname, '..', '.env') });
 
-const token      = process.env.AUTHORIZATION_TOKEN as string;
-const host       = process.env.APP_HOST as string;
-const apiOptions = {
-  webHook: {
-    port: 443,
-    pfx: '',
-    key: process.env.SSL_KEY as string,
-    cert: process.env.SSL_CERT as string,
-  },
-};
+const host  = process.env.APP_HOST as string;
+const token = process.env.AUTHORIZATION_TOKEN as string;
 
+// Specify callback url as public url
+const api = new TelegramApi(token);
+api.setWebHook(`https://${host}/bot${token}`);
+
+// Express listen it in :3000
 const app = express();
-const api = new TelegramApi(token, apiOptions);
-
 app.use(bodyParser.json());
-
-app.post(`/bot${token}`, (req, res): void => {
+app.post(`/bot${token}`, (req, res) => {
   api.processUpdate(req.body);
   res.sendStatus(200);
 });
-
-app.listen(443);
-
-api.setWebHook(`https://${host}/bot${token}`, {
-  certificate: apiOptions.webHook.cert,
-});
+app.listen(3000);
 
 api.on('message', (message): void => {
   const { text, from } = message;
