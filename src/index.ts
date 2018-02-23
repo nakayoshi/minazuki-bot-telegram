@@ -27,8 +27,8 @@ const apiOptions = {
   webHook: {
     port: 443,
     pfx: '',
-    key: process.env.SSL_CERT as string,
-    cert: process.env.SSL_KEY as string,
+    key: process.env.SSL_KEY as string,
+    cert: process.env.SSL_CERT as string,
   },
 };
 
