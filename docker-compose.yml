@@ -6,6 +6,7 @@ services:
       context: .
       args:
         - "ssl_certificate="
+        - "ssl_key="
     image: neetshin/minazuki-bot
     restart: always
     env_file: .env

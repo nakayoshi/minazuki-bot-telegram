@@ -26,8 +26,17 @@ const url      = process.env.APP_URL as string;
 const port     = process.env.APP_PORT || 443;
 const endpoint = `/bot${token}`;
 
+const options = {
+  webHook: {
+    port,
+    pfx: '',
+    key: '/etc/ssl/key.pem',
+    cert: '/etc/ssl/cert.pem',
+  },
+};
+
 const app = express();
-const api = new TelegramApi(token);
+const api = new TelegramApi(token, options);
 
 app.use(bodyParser.json());
 
@@ -39,7 +48,7 @@ app.post(endpoint, (req, res): void => {
 app.listen(port);
 
 api.setWebHook(`${url}:${port}${endpoint}`, {
-  certificate: '/etc/ssl/cert.pem',
+  certificate: options.webHook.cert,
 });
 
 api.on('message', (message): void => {

@@ -4,6 +4,7 @@ LABEL maintainer='Neetshin <n33t5hin@gmail.com>' \
       description='Super kawaii chat bot for Telegram'
 
 ARG ssl_certificate
+ARG ssl_key
 
 ENV NODE_ENV=production
 
@@ -24,6 +25,7 @@ RUN apk -U upgrade \
 COPY package.json yarn.lock /minazuki-bot/
 
 COPY $ssl_certificate /etc/ssl/cert.pem
+COPY $ssl_key /etc/ssl/key.pem
 
 RUN yarn install --pure-lockfile \
  && yarn run clear
