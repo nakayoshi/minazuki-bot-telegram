@@ -21,6 +21,8 @@ RUN apk -U upgrade \
 
 COPY package.json yarn.lock /minazuki-bot/
 
+COPY ${HOST_SSL_CERTIFICATE} /etc/ssl/cert.pem
+
 RUN yarn install --pure-lockfile \
  && yarn run clear
 

@@ -38,7 +38,9 @@ app.post(endpoint, (req, res): void => {
 
 app.listen(port);
 
-api.setWebHook(`${url}:${port}${endpoint}`);
+api.setWebHook(`${url}:${port}${endpoint}`, {
+  certificate: '/etc/ssl/cert.pem',
+});
 
 api.on('message', (message): void => {
   const { text, from } = message;
