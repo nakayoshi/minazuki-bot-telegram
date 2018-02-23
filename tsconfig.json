@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["es6"],
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./es",
     "rootDir": "./src",
 
     "strict": true,
