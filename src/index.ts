@@ -24,7 +24,6 @@ dotenv.config({ path: resolve(__dirname, '..', '.env') });
 const token    = process.env.AUTHORIZATION_TOKEN as string;
 const url      = process.env.APP_URL as string;
 const port     = process.env.APP_PORT || 443;
-const endpoint = `/bot${token}`;
 
 const options = {
   webHook: {
@@ -40,14 +39,14 @@ const api = new TelegramApi(token, options);
 
 app.use(bodyParser.json());
 
-app.post(endpoint, (req, res): void => {
+app.post(`/bot${token}`, (req, res): void => {
   api.processUpdate(req.body);
   res.sendStatus(200);
 });
 
 app.listen(port);
 
-api.setWebHook(`${url}:${port}${endpoint}`, {
+api.setWebHook(`${url}/bot${token}`, {
   certificate: options.webHook.cert,
 });
 
