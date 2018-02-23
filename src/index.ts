@@ -21,20 +21,19 @@ i18n.configure({
 
 dotenv.config({ path: resolve(__dirname, '..', '.env') });
 
-const token    = process.env.AUTHORIZATION_TOKEN as string;
-const url      = process.env.APP_URL as string;
-
-const options = {
+const token      = process.env.AUTHORIZATION_TOKEN as string;
+const host       = process.env.APP_HOST as string;
+const apiOptions = {
   webHook: {
     port: 443,
     pfx: '',
-    key: '/etc/ssl/key.pem',
-    cert: '/etc/ssl/cert.pem',
+    key: process.env.SSL_CERT as string,
+    cert: process.env.SSL_KEY as string,
   },
 };
 
 const app = express();
-const api = new TelegramApi(token, options);
+const api = new TelegramApi(token, apiOptions);
 
 app.use(bodyParser.json());
 
@@ -43,10 +42,10 @@ app.post(`/bot${token}`, (req, res): void => {
   res.sendStatus(200);
 });
 
-app.listen(80);
+app.listen(443);
 
-api.setWebHook(`${url}/bot${token}`, {
-  certificate: options.webHook.cert,
+api.setWebHook(`https://${host}/bot${token}`, {
+  certificate: apiOptions.webHook.cert,
 });
 
 api.on('message', (message): void => {

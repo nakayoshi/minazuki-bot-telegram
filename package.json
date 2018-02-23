@@ -5,14 +5,14 @@
   "author": "Neetshin <n33t5hin@gmail.com>",
   "description": "Super kawaii chat bot for Telegram",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "es/index.js",
   "engines": {
     "node": ">=8.9.4"
   },
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node ./dist",
-    "clear": "rm -rf ./dist/*",
+    "start": "npm run build && node ./es",
+    "clear": "rm -rf ./es/*",
     "test:lint": "./node_modules/.bin/tslint -c tslint.yml ./src/**/*.ts"
   },
   "dependencies": {
