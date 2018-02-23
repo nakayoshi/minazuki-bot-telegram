@@ -23,7 +23,7 @@ i18n.configure({
 dotenv.config({ path: resolve(__dirname, '..', '.env') });
 const token    = process.env.AUTHORIZATION_TOKEN as string;
 const url      = process.env.APP_URL as string;
-const port     = process.env.APP_PORT || 80;
+const port     = process.env.APP_PORT || 443;
 const endpoint = `/bot${token}`;
 
 const app = express();
