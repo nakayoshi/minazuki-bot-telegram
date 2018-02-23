@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        - ssl_certificate=
+        - "ssl_certificate="
     image: neetshin/minazuki-bot
     restart: always
     env_file: .env

@@ -5,8 +5,6 @@ LABEL maintainer='Neetshin <n33t5hin@gmail.com>' \
 
 ENV NODE_ENV=production
 
-ARG ssl_certificate="/etc/path/to/certificate"
-
 WORKDIR /minazuki-bot
 
 EXPOSE 80
