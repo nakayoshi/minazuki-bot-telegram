@@ -11,4 +11,4 @@ services:
     restart: always
     env_file: .env
     ports:
-      - "3000:443"
+      - "3000:80"

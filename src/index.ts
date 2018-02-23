@@ -19,15 +19,14 @@ i18n.configure({
   register: global,
 });
 
-// Define variables from .env
 dotenv.config({ path: resolve(__dirname, '..', '.env') });
+
 const token    = process.env.AUTHORIZATION_TOKEN as string;
 const url      = process.env.APP_URL as string;
-const port     = process.env.APP_PORT || 443;
 
 const options = {
   webHook: {
-    port,
+    port: 443,
     pfx: '',
     key: '/etc/ssl/key.pem',
     cert: '/etc/ssl/cert.pem',
@@ -44,7 +43,7 @@ app.post(`/bot${token}`, (req, res): void => {
   res.sendStatus(200);
 });
 
-app.listen(port);
+app.listen(80);
 
 api.setWebHook(`${url}/bot${token}`, {
   certificate: options.webHook.cert,
