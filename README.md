@@ -6,6 +6,7 @@ Super kawaii Chat bot for Telegram
 
 ## Using the bot
 You can use following command:
+
 |Command|Options|Description|Required permission|
 |:------|:------|:----------|:------------------|
 |`/hello`|-|Says hello to you|-|
