@@ -8,6 +8,7 @@
 
 	"leave": "さ、解散解散。引き上げでーす。",
 	"leave_on_private": "ココはプライベートチャットですよ？",
+	"leave_permission_denied": "管理者のみが利用できるコマンドです",
 
 	"webarchive": "Webページのアーカイブをリクエストしました (日本語が含まれたURLは正常に機能しません):\n%s",
 	"webarchive_undefined": "URLを指定してくだせー",

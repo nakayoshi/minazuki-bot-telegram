@@ -1,17 +1,22 @@
 {
 	"datetime": "H:mm",
 
-	"help": "/wiki - to find an article in Wikipedia\n/webarchive - to archive web site via archive.org\n/timezone - to show current time at timezone\n/leave - to leave form chat",
+	"help": "/wiki - to find an article in Wikipedia\n/webarchive - to archive web site with archive.org\n/timezone - to show current time at the timezone\n/leave - to leave form this chat",
 
 	"hello_with_name": "Hello world, %s",
 	"hello": "Hello world",
 
-	"leave": "Bye <3",
-	"leave_on_private": "This is private chat",
+	"leave": "Bye-bye <3",
+	"leave_on_private": "This is a private chat",
+	"leave_permission_denied": "This command is only available to administrators",
+
+	"webarchive": "Archiving the web page was requested:\n%s",
+	"webarchive_undefined": "You need to specify the URL",
+	"webarchive_not_found": "The specified URL was not found",
 
 	"wikipedia": "%s\n\n[Read more...](%s)",
 	"wikipedia_not_found": "No such article in Wikipedia",
-	"wikipedia_query_undefined": "You need to specify the keyword of article",
+	"wikipedia_query_undefined": "You need to specify title of the article",
 
 	"timezone_undefined": "You need to specify the timezone",
 	"timezone_not_found": "Unknown timezone specified"
