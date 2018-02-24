@@ -23,19 +23,20 @@ dotenv.config({ path: resolve(__dirname, '..', '.env') });
 
 const host  = process.env.APP_HOST as string;
 const token = process.env.AUTHORIZATION_TOKEN as string;
+const port  = process.env.APP_PORT || 80;
 
-// Specify callback url as public url
 const api = new TelegramApi(token);
-api.setWebHook(`https://${host}/bot${token}`);
+api.setWebHook(`https://${host}/bot${token}`, {
+  certificate: process.env.SSL_CERT,
+});
 
-// Express listen it in :3000
 const app = express();
 app.use(bodyParser.json());
-app.post(`/bot${token}`, (req, res) => {
+app.post(`/bot${token}`, (req, res): void => {
   api.processUpdate(req.body);
   res.sendStatus(200);
 });
-app.listen(3000);
+app.listen(port);
 
 api.on('message', (message): void => {
   const { text, from } = message;
