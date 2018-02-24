@@ -1,4 +1,4 @@
-import TelegramBot, { ChatMember } from 'node-telegram-bot-api';
+import TelegramBot from 'node-telegram-bot-api';
 import { __ } from 'i18n';
 
 const leave = (api: TelegramBot, message: TelegramBot.Message): Promise<TelegramBot.Message | boolean | Error> => {
