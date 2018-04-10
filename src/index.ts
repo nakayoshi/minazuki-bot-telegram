@@ -4,12 +4,14 @@ import i18n from 'i18n';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { resolve } from 'path';
+
 import hello from './methods/hello';
 import help from './methods/help';
 import wikipedia from './methods/wikipedia';
 import timezone from './methods/timezone';
 import leave from './methods/leave';
 import webarchive from './methods/webarchive';
+import md from './methods/md';
 
 i18n.configure({
   locales: ['ja', 'en'],
@@ -78,6 +80,12 @@ api.on('message', (message): void => {
    */
   } else if (/^\/webarchive/.test(text)) {
     webarchive(api, message);
+
+  /**
+   * /md [text]
+   */
+  } else if (/^\/md/.test(text)) {
+    md(api, message);
 
   /**
    * /leave

@@ -19,5 +19,7 @@
 	"wikipedia_query_undefined": "キーワードを指定してくだせー",
 
 	"timezone_undefined": "タイムゾーンを指定してくだせー",
-	"timezone_not_found": "タイムゾーンが見つからなかったです。"
+	"timezone_not_found": "タイムゾーンが見つからなかったです。",
+
+	"md_undefined": "Markdownを指定してくだせー"
 }

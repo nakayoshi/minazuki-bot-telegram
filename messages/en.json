@@ -19,5 +19,7 @@
 	"wikipedia_query_undefined": "You need to specify title of the article",
 
 	"timezone_undefined": "You need to specify the timezone",
-	"timezone_not_found": "Unknown timezone specified"
+	"timezone_not_found": "Unknown timezone specified",
+
+	"md_undefined": "You need to specify a markdown text"
 }
